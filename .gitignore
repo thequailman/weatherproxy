@@ -1,0 +1,4 @@
+.cache
+config.json
+coverage.out
+weatherproxy_*

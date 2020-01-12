@@ -1,0 +1,6 @@
+github.com/gorilla/schema v0.0.0-20180614150749-e0e4b92809ac h1:lVfnXNTKGzDsqFXV16vQyRly8fSE2JW3xubxjQKsTAs=
+github.com/gorilla/schema v0.0.0-20180614150749-e0e4b92809ac/go.mod h1:kgLaKoK1FELgZqMAVxx/5cbj0kT+57qxUrAlIO2eleU=
+github.com/influxdata/influxdb v0.0.0-20180827183135-f56b37fbd537 h1:J/XNlqR8ItbqzTFdfNE5BULT5xvDdwKdmgqE+sk0PKw=
+github.com/influxdata/influxdb v0.0.0-20180827183135-f56b37fbd537/go.mod h1:qZna6X/4elxqT3yI9iZYdZrWWdeFOOprn86kgg4+IzY=
+github.com/julienschmidt/httprouter v1.2.0 h1:TDTW5Yz1mjftljbcKqRcrYhd4XeOoI98t+9HbQbYf7g=
+github.com/julienschmidt/httprouter v1.2.0/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7VTCxuUUipMqKk8s4w=
