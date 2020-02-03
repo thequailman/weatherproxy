@@ -2,7 +2,6 @@
 
 DOCKER = docker-compose run --rm
 ENDPOINT ?= localhost:3000
-GO = $(DOCKER) golang:1.13 go
 SHELL := /bin/bash
 
 BUILD_DATE := $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
