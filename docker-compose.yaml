@@ -3,7 +3,7 @@ services:
     entrypoint: go
     environment:
       HOME: /app
-    image: golang:1.13
+    image: golang:1.14
     user: ${UID}:${GID}
     volumes:
       - ".:/app"
@@ -12,7 +12,7 @@ services:
     command: golangci-lint run
     environment:
       HOME: /app
-    image: golangci/golangci-lint:v1.20.1
+    image: golangci/golangci-lint:v1.23.8
     user: ${UID}:${GID}
     volumes:
       - ".:/app"
