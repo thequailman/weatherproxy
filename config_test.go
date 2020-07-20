@@ -13,7 +13,6 @@ func TestGetConfig(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		c := newConfig()
 		err := c.getConfigFile(test.path)
 		if err != test.err {
 			t.Errorf("%s: got %s, want %s", test.path, err, test.err)
@@ -23,4 +22,6 @@ func TestGetConfig(t *testing.T) {
 			}
 		}
 	}
+
+	c.getConfigFile("config.json")
 }

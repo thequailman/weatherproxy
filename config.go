@@ -11,29 +11,32 @@ import (
 )
 
 type config struct {
-	Debug    bool           `json:"debug"`
-	InfluxDB influxdbConfig `json:"influxdb"`
-	Port     int            `json:"port"`
+	Debug      bool             `json:"debug"`
+	PostgreSQL postgresqlConfig `json:"postgresql"`
+	Port       int              `json:"port"`
+	Timezone   string           `json:"timezone"`
 }
 
-type influxdbConfig struct {
-	Address  string `json:"address"`
+type postgresqlConfig struct {
+	Port     int    `json:"port"`
 	Database string `json:"database"`
+	Hostname string `json:"hostname"`
 	Password string `json:"password"`
+	SSLMode  string `json:"sslMode"`
 	Username string `json:"username"`
 }
 
-func newConfig() *config {
-	c := config{
-		InfluxDB: influxdbConfig{
-			Address:  "http://localhost:8086",
-			Database: "weather",
-			Password: "weather",
-			Username: "weather",
-		},
-		Port: 3000,
-	}
-	return &c
+var c *config = &config{
+	PostgreSQL: postgresqlConfig{
+		Database: "weatherproxy",
+		Hostname: "localhost",
+		Password: "weatherproxy",
+		Port:     5432,
+		SSLMode:  "disable",
+		Username: "weatherproxy",
+	},
+	Port:     3000,
+	Timezone: "UTC",
 }
 
 func (c *config) getConfigEnv() error {
@@ -46,7 +49,7 @@ func (c *config) getConfigEnv() error {
 func (c *config) getConfigFile(path string) error {
 	f, err := os.Open(path) // #nosec
 	if err != nil {
-		log.Print("ERROR: unable to open config: ", err)
+		logError("unable to open config: " + err.Error())
 		return ErrUnableToOpen
 	}
 	defer f.Close()
@@ -54,7 +57,7 @@ func (c *config) getConfigFile(path string) error {
 	j := json.NewDecoder(f)
 	err = j.Decode(c)
 	if err != nil {
-		log.Print("ERROR: unable to read config: ", err)
+		logError("unable to open config: " + err.Error())
 		return ErrUnableToRead
 	}
 
@@ -64,6 +67,7 @@ func (c *config) getConfigFile(path string) error {
 func (c *config) writeFile() error {
 	f, err := os.Create("config.json")
 	if err != nil {
+		logError("unable to write config: " + err.Error())
 		return err
 	}
 	defer f.Close()
@@ -71,6 +75,7 @@ func (c *config) writeFile() error {
 	// Mashsall JSON and indent
 	j, err := json.MarshalIndent(c, "", "    ")
 	if err != nil {
+		logError("unable to write config: " + err.Error())
 		return err
 	}
 

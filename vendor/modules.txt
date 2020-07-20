@@ -1,8 +1,7 @@
-# github.com/gorilla/schema v0.0.0-20180614150749-e0e4b92809ac
-github.com/gorilla/schema
-# github.com/influxdata/influxdb v0.0.0-20180827183135-f56b37fbd537
-github.com/influxdata/influxdb/client/v2
-github.com/influxdata/influxdb/models
-github.com/influxdata/influxdb/pkg/escape
-# github.com/julienschmidt/httprouter v1.2.0
-github.com/julienschmidt/httprouter
+# github.com/jmoiron/sqlx v1.2.0
+github.com/jmoiron/sqlx
+github.com/jmoiron/sqlx/reflectx
+# github.com/lib/pq v1.7.0
+github.com/lib/pq
+github.com/lib/pq/oid
+github.com/lib/pq/scram
