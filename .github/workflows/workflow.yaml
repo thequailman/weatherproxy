@@ -15,6 +15,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      - name: Bin Cache
+        uses: actions/cache@v1
+        with:
+          path: .bin
+          key: bin-${{ hashFiles('bin.mk') }}
       - name: Lint
         run: make lint
   test:
@@ -23,5 +28,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      - name: Bin Cache
+        uses: actions/cache@v1
+        with:
+          path: .bin
+          key: bin-${{ hashFiles('bin.mk') }}
       - name: Test
-        run: make test
+        run: |
+          make postgresql
+          make test

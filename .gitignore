@@ -1,3 +1,4 @@
+.bin
 .cache
 config.json
 coverage.out

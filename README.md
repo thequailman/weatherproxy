@@ -1,10 +1,10 @@
 # Weather Proxy
 
-A web application to proxy Weather Underground updates from weather stations to InfluxDB.
+A web application to proxy Weather Underground updates from weather stations to PostgreSQL.
 
 ## Installation
 
-- Install InfluxDB, create a database and user
+- Install PostgreSQL, create a database and user
 - Grab the latest version from releases or build Weather Proxy via `make build`
 - Generate a configuration for Weather Proxy via `./weatherproxy -g`
 - Edit the configuration with the correct values

@@ -26,7 +26,9 @@ func logDebug(s string, v ...interface{}) {
 }
 
 func logError(s string, v ...interface{}) {
-	logger.Error.Printf(s, v...)
+	s = fmt.Sprintf(s, v...)
+	_, file, line, _ := runtime.Caller(1)
+	logger.Error.Printf("%s/%s:%d %s", filepath.Base(filepath.Dir(file)), filepath.Base(file), line, s)
 }
 
 func enableDebug() {
