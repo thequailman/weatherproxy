@@ -1,6 +1,6 @@
 BINDIR = $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))/.bin
-GO_VERSION ?= 1.14.2
-GOLANGCI_LINT_VERSION ?= 1.26.0
+GO_VERSION ?= 1.14.6
+GOLANGCI_LINT_VERSION ?= 1.29.0
 SHELL := /bin/bash
 
 export GOROOT = $(BINDIR)/go/lib
