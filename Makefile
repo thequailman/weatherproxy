@@ -52,7 +52,8 @@ postgresql:
 	mkdir -p .tmp/api
 	docker run \
 		-d \
-		-e POSTGRES_PASSWORD=postgres \
+		-e POSTGRES_USER=weatherproxy \
+		-e POSTGRES_PASSWORD=weatherproxy \
 		$(DOCKER_LOGOPTS) \
 		--name weatherproxy_postgresql \
 		-p 127.0.0.1:5432:5432 \

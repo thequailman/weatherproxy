@@ -1,5 +1,7 @@
 # Weather Proxy
 
+[![CodeReady Workspace](https://img.shields.io/badge/CodeReady%20Workspace-Create-brightgreen)](https://codeready-openshift-workspaces.apps-crc.testing/f?url=https://raw.githubusercontent.com/thequailman/weatherproxy/master/devfile.yaml)
+
 A web application to proxy Weather Underground updates from weather stations to PostgreSQL.
 
 ## Installation

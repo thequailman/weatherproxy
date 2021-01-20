@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"runtime"
 	"strconv"
@@ -161,4 +162,6 @@ func getUpdateWeatherStation(w http.ResponseWriter, r *http.Request) {
 		logError("%s: %s", ErrUnableToParse, err)
 		http.Error(w, err.Error(), 500)
 	}
+
+	fmt.Fprintf(w, "success\n")
 }

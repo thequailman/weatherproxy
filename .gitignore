@@ -2,4 +2,4 @@
 .cache
 config.json
 coverage.out
-weatherproxy_*
+weatherproxy*

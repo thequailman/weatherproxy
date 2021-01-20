@@ -1,0 +1,89 @@
+apiVersion: 1.0.0
+metadata:
+  name: weatherproxy
+projects:
+  - name: weatherproxy
+    source:
+      type: git
+      location: "https://github.com/thequailman/weatherproxy.git"
+components:
+  - type: chePlugin
+    id: golang/go/latest
+    alias: go-plugin
+    memoryLimit: 512Mi
+    preferences:
+      go.lintTool: golangci-lint
+      go.lintFlags:
+        - '--fast'
+  - type: dockerimage
+    image: >-
+     registry.redhat.io/codeready-workspaces/stacks-golang-rhel8@sha256:4ecb4f5fe6917a0e54cdaa8bb8332a06472debc8a12e8c948d7abbb6e90a95f0
+    alias: go-cli
+    env:
+      - name: GOPATH
+        value: '/projects/.che/gopath:$(CHE_PROJECTS_ROOT)'
+      - name: GOCACHE
+        value: /tmp/.cache
+    endpoints:
+      - name: weatherproxy
+        port: 3000
+    memoryLimit: 512Mi
+    mountSources: true
+  - alias: postgresql
+    type: kubernetes
+    referenceContent: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          name: postgresql
+        name: postgresql
+      spec:
+        containers:
+          - image: image-registry.openshift-image-registry.svc:5000/openshift/postgresql
+            env:
+              - name: POSTGRESQL_DATABASE
+                value: weatherproxy
+              - name: POSTGRESQL_PASSWORD
+                value: weatherproxy
+              - name: POSTGRESQL_USER
+                value: weatherproxy
+            name: postgresql
+            ports:
+            - name: postgresql
+              containerPort: 5432
+commands:
+  - name: Build
+    actions:
+      - type: exec
+        component: go-cli
+        command: make build
+        workdir: '${CHE_PROJECTS_ROOT}/weatherproxy'
+  - name: Send Data
+    actions:
+      - type: exec
+        component: go-cli
+        command: make get
+        workdir: '${CHE_PROJECTS_ROOT}/weatherproxy'
+  - name: Test
+    actions:
+      - type: exec
+        component: go-cli
+        command: make test
+        workdir: '${CHE_PROJECTS_ROOT}/weatherproxy'
+  - name: Run
+    actions:
+      - type: exec
+        component: go-cli
+        command: go run .
+        workdir: '${CHE_PROJECTS_ROOT}/weatherproxy'
+  - name: psql
+    actions:
+      - type: exec
+        component: postgresql
+        command: psql weatherproxy
+  - name: select raw
+    actions:
+      - type: exec
+        component: postgresql
+        command: while true; do psql -c 'select * from raw' weatherproxy; sleep 1; done

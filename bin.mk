@@ -1,5 +1,5 @@
 BINDIR = $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))/.bin
-GO_VERSION ?= 1.14.6
+GO_VERSION ?= 1.15.7
 GOLANGCI_LINT_VERSION ?= 1.29.0
 SHELL := /bin/bash
 
